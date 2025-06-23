@@ -35,3 +35,13 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+  
+- task: AzureRmWebAppDeployment@5
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Create Dev'
+    appType: 'webAppLinux'
+    WebAppName: 'int-unicef'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'PYTHON|3.11'
+    DeploymentTypeLinux: 'oneDeploy'
